@@ -1,21 +1,38 @@
-## Requirement Analysis
+## Requirement Gathering
 
-1. What problem are we solving?
-	- Detect types of feelings like anger, disgust, fear, happiness, sadness, and surprise using expressed through the text.
+### About the Company
+
++ Journaling application
++ Provides mobile (ios/android), desktop and web application
++ Various analytics tools for self discovery
+
+### Context of the Product
+
++ Provide a in-depth analysis about their daily emotion
++ Need to get an accurate information about users' emotion
++ Current system
+	- Does not provide in-depth analysis of emotion though the text
 	
-2. Why do you need it?
-	- To measure how happy the citizens are
-	- To identify what measures to take when mass of people show negative emotions
-	- To grow positive emotions in peoples
-	
-3. Why now?
-	- Technology has made it possible to collect large amount of data and now we have enough data to find a pattern
-	- Language processing has evolved significantly, so we hope we can utilize it for the benifits of people
-	
-4. Current state of services?
-	- We do not have any method of doing so. We sometime manually review over some data to draw conclusion but that is quite tiresome
-	
-5. How much data do you have?
-	- Lots
-    
-    test from madan
+### About the new product
+
++ Can use any programming language
++ More priority on accurate and scalable solution
+
+### System usage
+
++ Used automatically by the existing system to classifying the text
+
+
+### About the data
+
++ Anonymized and annotated journal entries of 120 users collected over the period of two months.
+
+
+### Caveats
+
++ Dataset seems to be relatively small in size
+
+
+### General
+
++ Around 24 days timeline
