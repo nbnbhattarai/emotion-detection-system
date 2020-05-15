@@ -1,0 +1,15 @@
+artifact_uri: ./mlruns/1/b8306df7998440c1b01a9a1efc364bdd/artifacts
+end_time: 1589526013041
+entry_point_name: ''
+experiment_id: '1'
+lifecycle_stage: active
+name: ''
+run_id: b8306df7998440c1b01a9a1efc364bdd
+run_uuid: b8306df7998440c1b01a9a1efc364bdd
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1589525917533
+status: 3
+tags: []
+user_id: shadowswalker

@@ -1,3 +1,5 @@
+import logging
+
 from sklearn.naive_bayes import MultinomialNB
 from sklearn.model_selection import train_test_split
 from sklearn.metrics import classification_report
@@ -9,20 +11,33 @@ from utils.logreport import log_classification_report
 
 import mlflow
 
+logger = logging.getLogger(__name__)
+
 
 class NaiveBayesEmotionDetection():
     def __init__(self, test_size=None):
         self.test_size = test_size or 0.25
+        logger.info(f'Set test size to {self.test_size}')
 
     def experiment(self):
+        logger.info('Model experiment started.')
         self.model = MultinomialNB()
+        logger.info(f'Loading dataset.')
         self.dataset = load_emotion()
+        logger.info(f'Loading dataset completed.')
+
+        logger.info(f'Getting features.')
         self.X, self.y = get_features(self.dataset)
+        logger.info('Getting features completed')
+
         self.X_train, self.X_test, self.y_train, self.y_test = train_test_split(
             self.X, self.y, test_size=self.test_size)
 
+        logger.info(f'Training model started.')
         self.model.fit(self.X_train, self.y_train)
+        logger.info(f'Training model completed.')
 
+        logger.info('Performing model evaluation')
         y_train_pred = self.model.predict(self.X_train)
         y_test_pred = self.model.predict(self.X_test)
 
@@ -40,4 +55,6 @@ class NaiveBayesEmotionDetection():
         report['test'] = classification_report(
             ytest, ytest_pred, output_dict=True)
 
+        logger.info('Logging performance metrics')
         log_classification_report(report)
+        logger.info('Hurray !!! Model experiment completed.')

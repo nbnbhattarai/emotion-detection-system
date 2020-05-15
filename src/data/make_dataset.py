@@ -2,11 +2,15 @@
 Download dataset
 '''
 import os
+import logging
+
 import gdown
 
 import pandas as pd
 import numpy as np
 from data.dataset import Dataset
+
+logger = logging.getLogger(__name__)
 
 DATASET_URL = 'https://drive.google.com/uc?id=1l_J0P9A_AD8d_rzZHJ5Fg8F4y1nGP_x3'
 DATASET_FILENAME = '../data/raw/emotion_raw.txt'
@@ -18,15 +22,14 @@ def download_dataset(filename, rewrite=False):
     '''
 
     if not rewrite and os.path.exists(filename):
-        # log.info(f'Dataset file {filename} already exists.')
+        logger.info(f'Dataset file {filename} already exists.')
         return True
 
     try:
         gdown.download(DATASET_URL, filename, quiet=True)
-        # logger.success(f'Dataset file {filename} downloaded successfully.')
+        logger.info(f'Dataset file {filename} downloaded successfully.')
     except Exception as download_exception:
-        # logger.error(f'Exception occured: {download_exception}')
-        print(f'Exception {download_exception} occured!')
+        logger.error(f'Exception occured: {download_exception}')
         return False
 
     return True
