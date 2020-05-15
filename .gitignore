@@ -15,4 +15,4 @@ __pycache__/
 *.backup
 
 env/*.env/*
-data/
+./data/
