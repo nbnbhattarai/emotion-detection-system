@@ -4,7 +4,7 @@
 <html >
 <head>
   <meta charset="UTF-8">
-  <title>ML API</title>
+  <title>emotion Detection</title>
 
   <style>
     /* CSS code for button */
@@ -43,9 +43,9 @@
     <!-- Get input for predict the cancer -->
     <center>
     <form action="{{ url_for('predict')}}"method="post">
-        <h1>Enter the value of tumor features >>></h1>
+        <h1>Enter your emotion</h1>
         
-    	<input type="text" name="mean_radius" placeholder="mean radius" required="required" />
+    	<input type="text" name="enter your emotion" placeholder="mean radius" required="required" />
         <!-- <input type="text" name="mean_texture" placeholder="mean texture" required="required" />
 		<input type="text" name="mean_perimeter" placeholder="mean perimeter" required="required" />
 		<input type="text" name="mean_area" placeholder="mean area" required="required" />
@@ -84,7 +84,7 @@
         
         <!-- Show button -->
         <div class="button_cont" align="center"><a class="button_css"  target="_blank" rel="nofollow noopener">
-            <button type="submit" class="btn btn-primary btn-block btn-large"><strong>Predict Cancer</strong></button></a>
+            <button type="submit" class="btn btn-primary btn-block btn-large"><strong>Predict emotion</strong></button></a>
         </div>
         
     </form>
