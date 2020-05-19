@@ -16,7 +16,7 @@ def init_app():
 
     # Load Config File for DB
     app.config.from_pyfile('config/config.cfg')
-    CORS(app)
+    CORS(app, resources={r"/api/*": {"origins": "*"}})
     mongo = PyMongo(app)
 
     # Select the database
@@ -42,7 +42,7 @@ def create_route(app):
     app.add_url_rule("/api/v1/users/<user_id>",
                      view_func=remove_user, methods=['DELETE'])
     app.add_url_rule('/api/v1/predict/',
-                     methods=['GET'], view_func=classify_text)
+                     methods=['POST'], view_func=classify_text)
     return app
 
 

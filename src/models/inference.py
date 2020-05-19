@@ -45,12 +45,12 @@ def naive_inference(in_text):
     mpkl_f = open('artifacts/naive.pkl', 'rb')
     model = pickle.load(mpkl_f)
 
-    output = model.predict(x_vec)
+    output = model.predict_proba(x_vec)[0].tolist()
 
-    predict = model.labels[output[0]]
-    print(f'prediction: {predict}')
+    prediction = list(zip(model.labels, output))
+    print(f'prediction: {prediction}')
 
-    return in_text, predict
+    return in_text, prediction
 
 
 if __name__ == '__main__':

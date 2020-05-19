@@ -1,0 +1,126 @@
+<html>
+
+    <meta charset="UTF-8">
+
+  <head><title>Emotion classification</title>
+    <style>
+      /* * { */
+      /*     border: 1px solid black; */
+      /* } */
+
+      .container {
+          display: flex;
+          flex: 1;
+          width: 100%;
+          height: 100%;
+          flex-direction: column;
+          border: 1px solid #fefafe;
+      }
+
+      .container > .header {
+          display: flex;
+          flex: 0.05;
+          justify-content: center;
+          align-items: center;
+          width: 100%;
+      }
+
+      .container > .body {
+          display: flex;
+          flex: 0.95;
+          width: 100%;
+      }
+
+      .container > .body > .input-container {
+          display: flex;
+          flex: 0.4;
+          align-items: center;
+          justify-content: center;
+          padding: 5px;
+      }
+
+      .container > .body > .button-container {
+          display: flex;
+          flex: 0.2;
+          align-items: center;
+          justify-content: center;
+          padding: 3px;
+      }
+      .container > .body > .prediction-container {
+          display: flex;
+          flex: 0.4;
+          align-items: center;
+          justify-content: center;
+          padding: 5px;
+      }
+
+      .container > .body > .prediction-container > #chart-container {
+          width: 100%;
+          /* background-color:blue; */
+          height: 70%;
+      }
+
+      .input {
+          width: 100%;
+          height: 250px;
+      }
+    </style>
+    
+  </head>
+  <body>
+    <div class="container">
+      <div class="header">
+        <h3>Emotion classification</h3>
+      </div>
+      <div class="body">
+          <div class="container input-container">
+            <textarea id="text" class="input" name="text" cols="40" rows="5"></textarea>
+          </div>
+          <div class="container button-container">
+            <button id="submit" text="Classify">Predict</button>
+          </div>
+          <div class="container prediction-container">
+            <div id="chart-container"></div>
+          </div>
+      </div>
+      </div>
+    
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js" integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
+    <script src="https://cdn.anychart.com/releases/8.0.0/js/anychart-base.min.js"></script>
+
+    <script>
+      let url = "http://localhost:5000/api/v1/predict/"
+
+      async function get_prediction(){
+          let text_data = $("#text").val();
+          // console.log(text_data);
+          const response = await fetch(url, {
+              method: 'POST',
+              mode: 'cors',
+              headers: {
+                  'Content-Type': 'application/json'
+              },
+              body: JSON.stringify({text: text_data})
+          });
+
+          // console.log(response);
+          let response_json = await response.json();
+          return response_json;
+      }
+
+      $("#submit").on('click', function(){
+          console.log('click');
+          $("#chart-container").html("");
+          get_prediction().then(response => {
+              var chart = anychart.bar();
+              chart.data(response.pred);
+              chart.title("Emotion classification");
+              chart.container("chart-container");
+              chart.draw();
+          });
+      });
+
+    </script>
+    
+  </body>
+</html>

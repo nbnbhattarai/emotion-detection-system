@@ -14,14 +14,18 @@ def classify_text():
     '''
     Classify the text using given model name
     '''
+    print(vars(request))
+    print('request json:', request.json)
     db = shared_components['db']
     collection = db.inference_requests
 
     LOGGER.info(f'type of request json: {request.json}')
 
+    print(vars(request))
     if request.json:
         json_data = request.json
     else:
+        print('Invalid request')
         raise TypeError('Invalid request format.')
 
     record_id = collection.insert(json_data)
