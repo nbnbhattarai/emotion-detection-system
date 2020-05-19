@@ -1,6 +1,8 @@
 import argparse
 import logging
 
+import torch
+
 import mlflow
 
 from settings import get_logger
@@ -92,3 +94,9 @@ if args.model == 'svm':
     logger.info(f'Experiment {exp_name} started.')
     svm_model.experiment()
     logger.info(f'Experiment {exp_name} completed.')
+
+
+if args.model == 'rnn':
+    from models.rnn import RNNModel
+    model = RNNModel(args.test_size)
+    model.experiment(n_epochs=300)

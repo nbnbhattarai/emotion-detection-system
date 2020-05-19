@@ -1,5 +1,5 @@
 artifact_uri: ./mlruns/2/2813443df6b24e9db26a18566e7b5f96/artifacts
-end_time: null
+end_time: 1589526579165
 entry_point_name: ''
 experiment_id: '2'
 lifecycle_stage: active
@@ -10,6 +10,6 @@ source_name: ''
 source_type: 4
 source_version: ''
 start_time: 1589525117465
-status: 1
+status: 3
 tags: []
 user_id: shadowswalker

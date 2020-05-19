@@ -12,6 +12,8 @@ from autocorrect import Speller
 
 from sklearn.feature_extraction.text import CountVectorizer
 
+from utils.glove import get_glove
+
 nltk.download('punkt')
 nltk.download('stopwords')
 
@@ -58,3 +60,24 @@ def get_features(dataset):
     x_vec = cvector.fit_transform(x_raw)
 
     return x_vec.toarray(), y_target
+
+
+def get_glove_features(dataset):
+    '''
+    Convert given input data to glove feature vector
+    '''
+
+    x_raw = dataset.data
+
+    glove_features_all = get_glove()
+
+    if glove_features_all:
+        x_tokenized = [word_tokenize(text.lower()) for text in x_raw]
+        x_glove = [
+            [glove_features_all[w] for w in line if w in glove_features_all]
+            for line in x_tokenized
+        ]
+
+        return x_glove, dataset.target
+
+    return None
