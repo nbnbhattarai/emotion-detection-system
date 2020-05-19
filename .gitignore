@@ -14,5 +14,6 @@ __pycache__/
 # The backupfile
 *.backup
 
+env/
 env/*.env/*
 emotion_raw.txt
