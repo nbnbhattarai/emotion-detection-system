@@ -1,6 +1,6 @@
 bson==0.5.8
 Click==7.0
-Flask==0.12.2
+Flask==1.0
 Flask-Cors==3.0.7
 Flask-PyMongo==2.3.0
 gunicorn==19.9.0
