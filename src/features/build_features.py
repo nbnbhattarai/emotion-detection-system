@@ -59,7 +59,7 @@ def get_features(dataset):
 
     x_vec = cvector.fit_transform(x_raw)
 
-    return x_vec.toarray(), y_target
+    return cvector, x_vec.toarray(), y_target
 
 
 def get_glove_features(dataset):

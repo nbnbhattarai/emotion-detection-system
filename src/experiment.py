@@ -7,6 +7,8 @@ import mlflow
 
 from settings import get_logger
 
+import pickle
+
 parser = argparse.ArgumentParser()
 
 parser.add_argument(
@@ -59,6 +61,12 @@ if args.model == 'naive':
         naive_model = NaiveBayesEmotionDetection(test_size)
         logger.info(f'Experiment {exp_name} started.')
         naive_model.experiment()
+        with open('./artifacts/naive.pkl', 'wb') as fl:
+            pickle.dump(naive_model.model, fl)
+
+        with open('./artifacts/cvector.pkl', 'wb') as fl:
+            pickle.dump(naive_model.cvector, fl)
+
         logger.info(f'Experiment {exp_name} completed.')
 
 if args.model == 'svm':

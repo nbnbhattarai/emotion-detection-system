@@ -21,21 +21,19 @@ class SVMEmotionDetection():
         self.kernel = kernel or 'rbf'
         self.degree = degree or 2
         self.gamma = gamma or 'auto'
-
+        self.model = SVC(kernel=self.kernel, degree=self.degree,
+                         C=self.C, gamma=self.gamma)
         logger.info(
             f'Setting model parameters to: C={self.C}, kernel={self.kernel}, degree={self.degree}, gamma={self.gamma}')
 
     def experiment(self):
         logger.info('Model experiment started.')
-        self.model = SVC(kernel=self.kernel, degree=self.degree,
-                         C=self.C, gamma=self.gamma)
-
         logger.info('Loading dataset')
         self.dataset = load_emotion()
         logger.info('Loading dataset completed')
 
         logger.info('Getting features')
-        self.X, self.y = get_features(self.dataset)
+        self.cvector, self.X, self.y = get_features(self.dataset)
         logger.info('Getting features completed')
 
         self.X_train, self.X_test, self.y_train, self.y_test = train_test_split(

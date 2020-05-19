@@ -24,10 +24,11 @@ class NaiveBayesEmotionDetection():
         self.model = MultinomialNB()
         logger.info(f'Loading dataset.')
         self.dataset = load_emotion()
+        self.model.labels = self.dataset.labels
         logger.info(f'Loading dataset completed.')
 
         logger.info(f'Getting features.')
-        self.X, self.y = get_features(self.dataset)
+        self.cvector, self.X, self.y = get_features(self.dataset)
         logger.info('Getting features completed')
 
         self.X_train, self.X_test, self.y_train, self.y_test = train_test_split(
