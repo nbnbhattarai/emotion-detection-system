@@ -1,0 +1,14 @@
+version: '2.0'
+services:
+        flask:
+                build:
+                        context: .
+                ports:
+                        - "5000:5000"
+                environment:
+                        - MONGODB_DATABASE=emotiondb
+                        - MONGODB_HOSTNAME=mongodb
+        mongodb:
+                image: mongo:latest
+                ports:
+                        - "27017:27017"

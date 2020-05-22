@@ -17,3 +17,5 @@ __pycache__/
 env/
 env/*.env/*
 emotion_raw.txt
+
+mlruns/

@@ -57,9 +57,6 @@ if DATA_AUGMENTATION:
 if args.model == 'naive':
     LOGGER.info('Using naive bayes model')
 
-    # end run if already exists
-    mlflow.end_run()
-
     exp_name = 'Naive Bayes'
 
     mlflow.set_experiment(exp_name)

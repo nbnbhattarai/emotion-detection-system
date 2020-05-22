@@ -4,7 +4,10 @@ Build features from the dataset
 
 import os
 import re
+import random
+import logging
 
+import numpy as np
 import nltk
 from nltk.tokenize import word_tokenize
 from nltk.corpus import stopwords
@@ -14,14 +17,19 @@ from sklearn.feature_extraction.text import CountVectorizer
 
 from utils.glove import get_glove
 
+import nlpaug.augmenter.word as naw
+
 nltk.download('punkt')
 nltk.download('stopwords')
+nltk.download('averaged_perceptron_tagger')
 
 DATASET_FILE = 'data/'
 
 en_speller = Speller(lang='en')
 
 EN_STOPWORDS = stopwords.words('english')
+
+LOGGER = logging.getLogger(__name__)
 
 
 def process_text(text):
@@ -81,3 +89,26 @@ def get_glove_features(dataset):
         return x_glove, dataset.target
 
     return None
+
+
+def augment_dataset(dataset, prob=0.3, augment_type='wordnet'):
+    '''Augment data using wordnet'''
+    data_targets = list(zip(dataset.data, dataset.target))
+    sample_size = int(np.ceil(len(dataset.data) * prob))
+
+    LOGGER.info(f'Augmenting {sample_size} datasets')
+    sample_data = random.choices(data_targets, k=sample_size)
+
+    if augment_type == 'wordnet':
+        aug = naw.SynonymAug(aug_src='wordnet')
+
+    aug_data, aug_targets = list(zip(*[(aug.augment(text), target)
+                                       for text, target in sample_data]))
+
+    dataset.data = [*dataset.data, *aug_data]
+    dataset.target = [*dataset.target, *aug_targets]
+
+    LOGGER.info(
+        f'Total dataset size after augmentation: {len(dataset.target)}')
+
+    return dataset
